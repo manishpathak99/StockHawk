@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -47,10 +46,10 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyDetailActivity extends Activity implements SeekBar.OnSeekBarChangeListener,
+public class StockDetailActivity extends Activity implements SeekBar.OnSeekBarChangeListener,
         OnChartGestureListener, OnChartValueSelectedListener {
 
-    private static String LOG_TAG = MyDetailActivity.class.getSimpleName();
+    private static String LOG_TAG = StockDetailActivity.class.getSimpleName();
     private OkHttpClient client = new OkHttpClient();
     private String symbol;
     private LineChart mChart;
@@ -71,12 +70,10 @@ public class MyDetailActivity extends Activity implements SeekBar.OnSeekBarChang
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_linechart);
 
-        if (!NetworkUtil.checkInternetConnection(MyDetailActivity.this)) {
-            NetworkUtil.showNetWorkSnackBar(MyDetailActivity.this);
+        if (!NetworkUtil.checkInternetConnection(StockDetailActivity.this)) {
+            NetworkUtil.showNetWorkSnackBar(StockDetailActivity.this);
             return;
         }
         Intent intent = getIntent();
@@ -332,11 +329,6 @@ public class MyDetailActivity extends Activity implements SeekBar.OnSeekBarChang
             // modify the legend ... by default it is on the left
             l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
             l.setForm(Legend.LegendForm.SQUARE);
-//            Legend l = mChart.getLegend();
-//
-//            // modify the legend ...
-//            // l.setPosition(LegendPosition.LEFT_OF_CHART);
-//            l.setForm(Legend.LegendForm.LINE);
             mChart.invalidate();
         }
     }
@@ -372,7 +364,7 @@ public class MyDetailActivity extends Activity implements SeekBar.OnSeekBarChang
 
             if (Utils.getSDKInt() >= 18) {
                 // fill drawable only supported on api level 18 and above
-                Drawable drawable = ContextCompat.getDrawable(this, R.drawable.fade_red);
+                Drawable drawable = ContextCompat.getDrawable(this, R.drawable.fade_blue);
                 set1.setFillDrawable(drawable);
             }
             else {
