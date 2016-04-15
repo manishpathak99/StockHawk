@@ -107,7 +107,7 @@ public class QuoteCursorAdapter extends CursorRecyclerViewAdapter<QuoteCursorAda
 
     @Override
     public void onItemSelected(){
-      itemView.setBackgroundColor(Color.LTGRAY);
+      itemView.setBackgroundColor(Color.RED);
     }
 
     @Override
