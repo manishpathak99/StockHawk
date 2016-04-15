@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.support.v7.widget.RecyclerView;
 
+import com.sam_chordas.android.stockhawk.R;
+
 /**
  * Created by sam_chordas on 10/6/15.
  *  Credit to skyfishjy gist:
@@ -17,8 +19,10 @@ public abstract class CursorRecyclerViewAdapter <VH extends RecyclerView.ViewHol
   private boolean dataIsValid;
   private int rowIdColumn;
   private DataSetObserver mDataSetObserver;
+  private Context mContext;
   public CursorRecyclerViewAdapter(Context context, Cursor cursor){
     mCursor = cursor;
+    mContext = context;
     dataIsValid = cursor != null;
     rowIdColumn = dataIsValid ? mCursor.getColumnIndex("_id") : -1;
     mDataSetObserver = new NotifyingDataSetObserver();
@@ -55,10 +59,10 @@ public abstract class CursorRecyclerViewAdapter <VH extends RecyclerView.ViewHol
   @Override
   public void onBindViewHolder(VH viewHolder, int position) {
     if (!dataIsValid){
-      throw new IllegalStateException("This should only be called when Cursor is valid");
+      throw new IllegalStateException(mContext.getString(R.string.called_when_cursor_is_valid));
     }
     if (!mCursor.moveToPosition(position)){
-      throw new IllegalStateException("Could not move Cursor to position: " + position);
+      throw new IllegalStateException(mContext.getString(R.string.not_move_cursor) + position);
     }
 
     onBindViewHolder(viewHolder, mCursor);
