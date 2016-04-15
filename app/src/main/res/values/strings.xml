@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">Stock Hawk</string>
+  <string name="app_name" translatable="false">Stock Hawk</string>
 
   <string name="action_example">Example action</string>
 
@@ -14,4 +14,10 @@
   <string name="stock_symbol_does_not_exist">Searched for stock symbol does not exist.</string>
   <string name="called_when_cursor_is_valid">This should only be called when Cursor is valid</string>
   <string name="not_move_cursor">"Could not move Cursor to position: "</string>
+
+  <string name="talkback_stock_symbol">"Stock symbol "</string>
+  <string name="talkback_change">"Change "</string>
+  <string name="talkback_bid_price">"Bid price "</string>
+  <string name="talkback_percent_change">"Percent change "</string>
+  <string name="talkback_fab_button">Add stock symbol</string>
 </resources>
