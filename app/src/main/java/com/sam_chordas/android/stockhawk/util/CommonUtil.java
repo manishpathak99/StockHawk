@@ -32,15 +32,24 @@ public class CommonUtil {
     }
 
     public static void showToastInUiThread(@NonNull final Context ctx,
-                                          @NonNull final String stringMsg) {
+                                           @NonNull final String stringMsg) {
 
         Handler mainThread = new Handler(Looper.getMainLooper());
         mainThread.post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(ctx, stringMsg, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, stringMsg, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public static void showToast(@NonNull final Context ctx,
+                                 @NonNull final Object stringMsg) {
+        if(stringMsg instanceof String) {
+            Toast.makeText(ctx, (String)stringMsg, Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(ctx, (Integer) stringMsg, Toast.LENGTH_LONG).show();
+        }
     }
 
 }
