@@ -1,6 +1,5 @@
 package com.sam_chordas.android.stockhawk.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -8,10 +7,9 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.SeekBar;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
@@ -46,26 +44,13 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StockDetailActivity extends Activity implements SeekBar.OnSeekBarChangeListener,
+public class StockDetailActivity extends AppCompatActivity implements
         OnChartGestureListener, OnChartValueSelectedListener {
 
     private static String LOG_TAG = StockDetailActivity.class.getSimpleName();
     private OkHttpClient client = new OkHttpClient();
     private String symbol;
     private LineChart mChart;
-
-    String fetchData(String url) throws IOException {
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        Response response = client.newCall(request).execute();
-        return response.body().string();
-    }
-
-    public void networkToast(){
-        Toast.makeText(this, getString(R.string.network_toast), Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -237,19 +222,13 @@ public class StockDetailActivity extends Activity implements SeekBar.OnSeekBarCh
 
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+    private String fetchData(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
 
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
+        Response response = client.newCall(request).execute();
+        return response.body().string();
     }
 
     /*****************************************DownloadQuoteDetailsTask*****************************************************/
@@ -325,8 +304,6 @@ public class StockDetailActivity extends Activity implements SeekBar.OnSeekBarCh
             mChart.getXAxis().setValues(buildChart.getXAxisList());
             mChart.getXAxis().setTextColor(Color.WHITE);
             Legend l = mChart.getLegend();
-
-            // modify the legend ... by default it is on the left
             l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
             l.setForm(Legend.LegendForm.SQUARE);
             mChart.invalidate();
