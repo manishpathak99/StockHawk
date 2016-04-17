@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -67,6 +68,11 @@ public class StockDetailActivity extends AppCompatActivity implements
             DownloadQuoteDetailsTask quoteDetailsTask = new DownloadQuoteDetailsTask();
             quoteDetailsTask.execute(symbol);
         }
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setTitle(symbol);
+
         initChart();
     }
 
@@ -132,8 +138,8 @@ public class StockDetailActivity extends AppCompatActivity implements
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
-        leftAxis.addLimitLine(ll1);
-        leftAxis.addLimitLine(ll2);
+//        leftAxis.addLimitLine(ll1);
+//        leftAxis.addLimitLine(ll2);
         leftAxis.setAxisMaxValue(220f);
         leftAxis.setAxisMinValue(-50f);
         //leftAxis.setYOffset(20f);
